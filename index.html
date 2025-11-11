@@ -59,11 +59,33 @@
         }
 
         .hero {
-            background: linear-gradient(to right, #f9f7f4 0%, #ede9e0 100%);
-            padding: 90px 30px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
+    background: url("images/banner.jpg") center/cover no-repeat;
+    padding: 120px 30px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(255,255,255,0.25); /* soft white matte */
+    backdrop-filter: blur(1px) brightness(0.9);
+    z-index: 1;
+}
+
+
+
+.hero > * {
+    position: relative;
+    z-index: 2;
+    color: white; /* Ensures readability on the brick background */
+}
+
 
         .hero h1 {
             font-size: 48px;
@@ -75,7 +97,7 @@
 
         .hero p {
             font-size: 16px;
-            color: #666;
+            color: #333;
             margin-bottom: 12px;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -175,6 +197,30 @@
 
         .gallery-section {
             margin-top: 50px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border: 1px solid #ddd;
+            aspect-ratio: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
 
         .gallery-grid {
@@ -397,7 +443,7 @@
                     We ship nationwide to customers throughout the US and Canada. Whether you're a contractor restoring a classic home, an architect designing with character, or a builder looking for something authentic, we have what you need.
                 </p>
             </div>
-            <div class="about-image" style="background-size: cover; background-position: center; background-image: url('images/IMG_7243.jpeg');"></div>
+            <img src="images/lexington-village-theatre.jpg" alt="Reclaimed Detroit Red Bricks" style="width: 100%; height: 400px; object-fit: cover; border: 1px solid #ddd;">
         </div>
     </section>
 
@@ -445,13 +491,38 @@
 
     </section>
 
+    <section class="section" id="gallery">
+        <h2>Gallery</h2>
+        <p class="section-subtitle">Our Reclaimed Brick Inventory</p>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="images/house.jpg" alt="Reclaimed Brick">
+            </div>
+            <div class="gallery-item">
+                <img src="images/bdubs.jpg" alt="Reclaimed Brick">
+            </div>
+            <div class="gallery-item">
+                <img src="images/IMG_7242.jpeg" alt="Brick Pallets">
+            </div>
+            <div class="gallery-item">
+                <img src="images/bricks.jpg" alt="Reclaimed Bricks">
+            </div>
+            <div class="gallery-item">
+                <img src="images/IMG_7243.jpg" alt="Reclaimed Brick Detail">
+            </div>
+            <div class="gallery-item">
+                <img src="images/white.jpg" alt="Reclaimed Brick">
+            </div>
+        </div>
+    </section>
+
     <section class="section contact-section" id="contact">
         <h2>Contact Us</h2>
         <p class="section-subtitle">Call for Pricing and Availability</p>
         <div class="contact-grid">
             <div class="contact-item">
                 <h3>Phone</h3>
-                <p><a href="tel:+12488726241">(248) 872-6241</a></p>
+                </p><a href="tel:+12488726241">Joel Henry: (248) 872-6241</a></p>
                 <p>Monday – Friday</p>
                 <p>9:00 AM – 3:00 PM</p>
             </div>
