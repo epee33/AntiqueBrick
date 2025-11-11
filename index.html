@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antique Brick - Reclaimed Detroit Red Bricks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            color: #333;
+            line-height: 1.7;
+            background: #fff;
+        }
+
+        header {
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            margin-left: 35px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #999;
+        }
+
+        .hero {
+            background: linear-gradient(to right, #f9f7f4 0%, #ede9e0 100%);
+            padding: 90px 30px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: normal;
+            letter-spacing: 3px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .phone-cta {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .phone-cta a {
+            color: #333;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .phone-cta a:hover {
+            text-decoration: underline;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #333;
+            color: white;
+            padding: 12px 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #666;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 70px 30px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            font-size: 38px;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.9;
+        }
+
+        .about-image {
+            background: #f5f5f5;
+            height: 400px;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .gallery-section {
+            margin-top: 50px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            height: 300px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .content-section {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .content-section p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.9;
+            text-align: left;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-box {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .feature-box h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .feature-box p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            padding: 30px;
+            background: #f9f7f4;
+            border: 1px solid #e5e0d8;
+            text-align: center;
+        }
+
+        .service-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .contact-section {
+            background: #f9f7f4;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 30px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-item p {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-item a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: #333;
+            color: #999;
+            text-align: center;
+            padding: 30px;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin-left: 20px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-image {
+                height: 300px;
+            }
+
+            .section {
+                padding: 50px 20px;
+            }
+
+            .section h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">ANTIQUE BRICK</div>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Genuine Reclaimed Detroit Red Bricks</h1>
+        <p>FOR CHARACTER, COLOR AND TEXTURE, NOTHING COMPARES TO ANTIQUE BRICKS CAREFULLY SALVAGED FROM HISTORIC DETROIT BUILDINGS. CALL NOW TO DISCUSS YOUR PROJECT:</p>
+        <div class="phone-cta">
+            <a href="tel:+12488726241">(248) 872-6241</a>
+        </div>
+        <a href="#contact" class="cta-button">Learn More</a>
+    </section>
+
+    <section class="section" id="about">
+        <h2>About Antique Brick</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    Since 1988, Antique Brick has been Michigan's premier source for authentic reclaimed Detroit red bricks. We work directly with demolition sites to salvage quality bricks from historic buildings across the region.
+                </p>
+                <p>
+                    Every brick we salvage tells a story. These bricks were carefully crafted in past centuries and lovingly reclaimed by us. You deserve nothing less than genuine antique bricks for your project.
+                </p>
+                <p>
+                    We ship nationwide to customers throughout the US and Canada. Whether you're a contractor restoring a classic home, an architect designing with character, or a builder looking for something authentic, we have what you need.
+                </p>
+            </div>
+            <div class="about-image" style="background-size: cover; background-position: center; background-image: url('images/IMG_7243.jpeg');"></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Why Choose Antique Brick</h2>
+        <p class="section-subtitle">Over 35 Years of Experience</p>
+        <div class="features-grid">
+            <div class="feature-box">
+                <h3>Authentic Quality</h3>
+                <p>Real reclaimed bricks from Detroit buildings. Each brick has genuine character and authentic patina that cannot be replicated.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Historic Sourcing</h3>
+                <p>Salvaged from demolished historic Detroit buildings. Perfect for restoration work that needs to match original architecture.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Nationwide Shipping</h3>
+                <p>We ship throughout the US and Canada. Fast, reliable delivery on orders of any size to your project site.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Competitive Pricing</h3>
+                <p>Wholesale rates for contractors and builders. Volume discounts available on bulk orders.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="services">
+        <h2>What We Offer</h2>
+        <p class="section-subtitle">Premium Reclaimed Brick Services</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Detroit Red Bricks</h3>
+                <p>Authentic reclaimed bricks from demolished historic Detroit buildings. Perfect for restoration, new construction, and custom architectural projects.</p>
+            </div>
+            <div class="service-card">
+                <h3>Bulk Orders</h3>
+                <p>Large quantities for contractors and builders. We handle sourcing, pricing, and shipping directly to your project site.</p>
+            </div>
+            <div class="service-card">
+                <h3>Specialty Selection</h3>
+                <p>Looking for specific brick sizes, colors, or styles? We work with you to find exactly what you need from our extensive inventory.</p>
+            </div>
+        </div>
+
+
+    </section>
+
+    <section class="section contact-section" id="contact">
+        <h2>Contact Us</h2>
+        <p class="section-subtitle">Call for Pricing and Availability</p>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <h3>Phone</h3>
+                <p><a href="tel:+12488726241">(248) 872-6241</a></p>
+                <p>Monday – Friday</p>
+                <p>9:00 AM – 3:00 PM</p>
+            </div>
+            <div class="contact-item">
+                <h3>Location</h3>
+                <p>345 Midland St</p>
+                <p>Highland Park, MI 48203</p>
+            </div>
+            <div class="contact-item">
+                <h3>Shipping</h3>
+                <p>We ship to all 50 states</p>
+                <p>and Canada</p>
+                <p><a href="https://antiquebrickinc.com">antiquebrickinc.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 ANTIQUE BRICK. DETROIT RED BRICK DISTRIBUTOR SINCE 1988.</p>
+    </footer>
+</body>
+</html>
