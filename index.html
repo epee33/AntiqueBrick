@@ -3,28 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Michigan's largest distributor of reclaimed Detroit red bricks since 1988. Authentic antique bricks for restoration and construction projects.">
+    <meta name="keywords" content="antique brick, reclaimed brick, Detroit red brick, vintage brick, historic brick">
     <title>Antique Brick - Reclaimed Detroit Red Bricks</title>
     <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #666;
+            --accent-color: #8B4513;
+            --text-color: #333;
+            --text-light: #666;
+            --bg-light: #f9f7f4;
+            --border-color: #ddd;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: Georgia, serif;
-            color: #333;
+            color: var(--text-color);
             line-height: 1.7;
             background: #fff;
+            overflow-x: hidden;
         }
 
         header {
-            background: #fff;
-            border-bottom: 1px solid #ddd;
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid var(--border-color);
             padding: 20px 0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .header-content {
@@ -39,67 +67,141 @@
         .logo {
             font-size: 26px;
             font-weight: bold;
-            color: #333;
+            color: var(--primary-color);
             letter-spacing: 2px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+            align-items: center;
         }
 
         nav a {
-            color: #333;
+            color: var(--text-color);
             text-decoration: none;
-            margin-left: 35px;
             font-size: 13px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: color 0.3s;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
         }
 
         nav a:hover {
-            color: #999;
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         .hero {
-    background: url("images/banner.jpg") center/cover no-repeat;
-    padding: 120px 30px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-    position: relative;
-}
+            background: url("images/banner.jpg") center/cover no-repeat;
+            padding: 140px 30px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    height: 100%;
-    background: rgba(255,255,255,0.25); /* soft white matte */
-    backdrop-filter: blur(1px) brightness(0.9);
-    z-index: 1;
-}
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+            z-index: 1;
+        }
 
-.bold-text {
-    font-weight: bold; /* or 700 for extra thickness */
-}
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            animation: fadeInUp 1s ease-out;
+        }
 
-.hero > * {
-    position: relative;
-    z-index: 2;
-    color: white; /* Ensures readability on the brick background */
-}
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
+        .bold-text {
+            font-weight: bold;
+        }
 
         .hero h1 {
-            font-size: 48px;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: normal;
+            font-size: 52px;
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-weight: bold;
             letter-spacing: 3px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
         .hero p {
-            font-size: 16px;
-            color: #333;
+            font-size: 18px;
+            color: #ffffff;
             margin-bottom: 12px;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -107,48 +209,68 @@
             margin-left: auto;
             margin-right: auto;
             line-height: 1.8;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .phone-cta {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: bold;
-            color: #333;
-            margin-top: 25px;
-            margin-bottom: 25px;
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .phone-cta a {
-            color: #333;
+            color: #ffffff;
             text-decoration: none;
             letter-spacing: 1px;
+            transition: var(--transition);
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
         }
 
         .phone-cta a:hover {
-            text-decoration: underline;
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
         }
 
         .cta-button {
             display: inline-block;
-            background: #333;
+            background: var(--primary-color);
             color: white;
-            padding: 12px 40px;
+            padding: 14px 45px;
             text-decoration: none;
             font-weight: 600;
             font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: background 0.3s;
+            transition: var(--transition);
+            border-radius: 3px;
+            margin-top: 10px;
+            box-shadow: var(--shadow);
         }
 
         .cta-button:hover {
-            background: #666;
+            background: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
         }
 
         .section {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 70px 30px;
-            border-bottom: 1px solid #ddd;
+            padding: 80px 30px;
+            border-bottom: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section:last-of-type {
@@ -157,19 +279,32 @@
 
         .section h2 {
             font-size: 38px;
-            color: #333;
+            color: var(--text-color);
             margin-bottom: 30px;
             font-weight: normal;
             letter-spacing: 2px;
             text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
         }
 
         .section-subtitle {
             font-size: 14px;
-            color: #666;
+            color: var(--text-light);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             text-align: center;
         }
 
@@ -182,86 +317,28 @@
 
         .about-text p {
             font-size: 15px;
-            color: #555;
+            color: var(--text-light);
             margin-bottom: 20px;
             line-height: 1.9;
         }
 
         .about-image {
-            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .about-image:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .about-image img {
+            width: 100%;
             height: 400px;
-            border: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-        }
-
-        .gallery-section {
-            margin-top: 50px;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .gallery-item {
-            overflow: hidden;
-            border: 1px solid #ddd;
-            aspect-ratio: 1;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .gallery-item {
-            height: 300px;
-            background: #f5f5f5;
-            border: 1px solid #ddd;
-            overflow: hidden;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .content-section {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .content-section p {
-            font-size: 15px;
-            color: #555;
-            margin-bottom: 25px;
-            line-height: 1.9;
-            text-align: left;
+            display: block;
         }
 
         .features-grid {
@@ -273,12 +350,21 @@
 
         .feature-box {
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 25px;
+            border-radius: 8px;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            background: var(--bg-light);
         }
 
         .feature-box h3 {
             font-size: 18px;
-            color: #333;
+            color: var(--text-color);
             margin-bottom: 15px;
             font-weight: 600;
             letter-spacing: 1px;
@@ -286,7 +372,7 @@
 
         .feature-box p {
             font-size: 14px;
-            color: #666;
+            color: var(--text-light);
             line-height: 1.8;
         }
 
@@ -298,15 +384,23 @@
         }
 
         .service-card {
-            padding: 30px;
-            background: #f9f7f4;
-            border: 1px solid #e5e0d8;
+            padding: 40px 30px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
             text-align: center;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-color);
         }
 
         .service-card h3 {
             font-size: 18px;
-            color: #333;
+            color: var(--text-color);
             margin-bottom: 15px;
             font-weight: 600;
             letter-spacing: 1px;
@@ -314,12 +408,64 @@
 
         .service-card p {
             font-size: 14px;
-            color: #666;
+            color: var(--text-light);
             line-height: 1.8;
         }
 
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            height: 300px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 0.8;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(0.7);
+        }
+
         .contact-section {
-            background: #f9f7f4;
+            background: var(--bg-light);
             text-align: center;
         }
 
@@ -336,11 +482,20 @@
 
         .contact-item {
             text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
         }
 
         .contact-item h3 {
             font-size: 16px;
-            color: #333;
+            color: var(--text-color);
             margin-bottom: 15px;
             font-weight: 600;
             text-transform: uppercase;
@@ -349,55 +504,197 @@
 
         .contact-item p {
             font-size: 15px;
-            color: #666;
+            color: var(--text-light);
             margin-bottom: 10px;
             letter-spacing: 0.5px;
         }
 
         .contact-item a {
-            color: #333;
+            color: var(--text-color);
             text-decoration: none;
             font-weight: 600;
+            transition: var(--transition);
         }
 
         .contact-item a:hover {
+            color: var(--accent-color);
             text-decoration: underline;
         }
 
         footer {
-            background: #333;
+            background: var(--primary-color);
             color: #999;
             text-align: center;
-            padding: 30px;
+            padding: 40px 30px;
             font-size: 13px;
             letter-spacing: 1px;
         }
 
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 2001;
+        }
+
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+            color: var(--accent-color);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            font-size: 30px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 5px;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .lightbox-prev {
+            left: 30px;
+        }
+
+        .lightbox-next {
+            right: 30px;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: var(--shadow);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
         @media (max-width: 768px) {
-            .header-content {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
                 flex-direction: column;
-                gap: 15px;
+                justify-content: flex-start;
+                padding-top: 50px;
+                gap: 30px;
+                transition: left 0.3s ease;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            nav.active {
+                left: 0;
             }
 
             nav a {
-                margin-left: 20px;
+                font-size: 18px;
+                margin: 0;
             }
+
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .hero {
+                padding: 100px 20px;
+                min-height: 500px;
+            }
+
 
             .hero h1 {
                 font-size: 32px;
             }
 
             .hero p {
-                font-size: 14px;
+                font-size: 16px;
             }
 
             .about-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
-            }
-
-            .about-image {
-                height: 300px;
             }
 
             .section {
@@ -407,30 +704,75 @@
             .section h2 {
                 font-size: 28px;
             }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid,
+            .services-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lightbox-nav {
+                display: none;
+            }
+
+            .lightbox-close {
+                top: 20px;
+                right: 20px;
+                font-size: 30px;
+            }
+
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .section h2 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
+    <header id="header">
         <div class="header-content">
-            <div class="logo">ANTIQUE BRICK</div>
-            <nav>
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#contact">Contact</a>
+            <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">ANTIQUE BRICK</div>
+            <nav id="nav">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </nav>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </header>
 
     <section class="hero">
-        <div class="bold-text" style="font-size: 52px; ; color: #333;">"Michigans Largest Distributor of Old Detroit Red Bricks"</div>
-        
-        <p class="bold-text">
-           FOR CHARACTER, COLOR AND TEXTURE, NOTHING COMPARES TO ANTIQUE BRICKS CAREFULLY SALVAGED FROM HISTORIC DETROIT BUILDINGS. CALL NOW TO DISCUSS YOUR PROJECT:</p>
-        <div class="phone-cta">
-            <a href="tel:+12488726241">(248) 872-6241</a>
+        <div class="hero-content">
+            <h1 class="bold-text">"Michigan's Largest Distributor of Old Detroit Red Bricks"</h1>
+            <p class="bold-text">
+                FOR CHARACTER, COLOR AND TEXTURE, NOTHING COMPARES TO ANTIQUE BRICKS CAREFULLY SALVAGED FROM HISTORIC DETROIT BUILDINGS. CALL NOW TO DISCUSS YOUR PROJECT:
+            </p>
+            <div class="phone-cta">
+                <a href="tel:+12488726241">(248) 872-6241</a>
+            </div>
+            <a href="#contact" class="cta-button">Learn More</a>
         </div>
-        <a href="#contact" class="cta-button">Learn More</a>
     </section>
 
     <section class="section" id="about">
@@ -447,7 +789,9 @@
                     We ship nationwide to customers throughout the US and Canada. Whether you're a contractor restoring a classic home, an architect designing with character, or a builder looking for something authentic, we have what you need.
                 </p>
             </div>
-            <img src="images/lexington-village-theatre.jpg" alt="Reclaimed Detroit Red Bricks" style="width: 100%; height: 400px; object-fit: cover; border: 1px solid #ddd;">
+            <div class="about-image">
+                <img src="images/lexington-village-theatre.jpg" alt="Reclaimed Detroit Red Bricks" loading="lazy">
+            </div>
         </div>
     </section>
 
@@ -499,31 +843,29 @@
                 <p>Looking for specific brick sizes, colors, or styles? We work with you to find exactly what you need from our extensive inventory.</p>
             </div>
         </div>
-
-
     </section>
 
     <section class="section" id="gallery">
         <h2>Gallery</h2>
         <p class="section-subtitle">Our Reclaimed Brick Inventory</p>
         <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="images/house.jpg" alt="Reclaimed Brick">
+            <div class="gallery-item" data-image="images/house.jpg" data-alt="Reclaimed Brick">
+                <img src="images/house.jpg" alt="Reclaimed Brick" loading="lazy">
             </div>
-            <div class="gallery-item">
-                <img src="images/bdubs.jpg" alt="Reclaimed Brick">
+            <div class="gallery-item" data-image="images/bdubs.jpg" data-alt="Reclaimed Brick">
+                <img src="images/bdubs.jpg" alt="Reclaimed Brick" loading="lazy">
             </div>
-            <div class="gallery-item">
-                <img src="images/brickyard.jpg" alt="Brick Pallets">
+            <div class="gallery-item" data-image="images/brickyard.jpg" data-alt="Brick Pallets">
+                <img src="images/brickyard.jpg" alt="Brick Pallets" loading="lazy">
             </div>
-            <div class="gallery-item">
-                <img src="images/IMG_0058.JPG" alt="Reclaimed Bricks">
+            <div class="gallery-item" data-image="images/IMG_0058.JPG" data-alt="Reclaimed Bricks">
+                <img src="images/IMG_0058.JPG" alt="Reclaimed Bricks" loading="lazy">
             </div>
-            <div class="gallery-item">
-                <img src="images/patio.jpg" alt="Reclaimed Brick Detail">
+            <div class="gallery-item" data-image="images/patio.jpg" data-alt="Reclaimed Brick Detail">
+                <img src="images/patio.jpg" alt="Reclaimed Brick Detail" loading="lazy">
             </div>
-            <div class="gallery-item">
-                <img src="images/white.jpg" alt="Reclaimed Brick">
+            <div class="gallery-item" data-image="images/white.jpg" data-alt="Reclaimed Brick">
+                <img src="images/white.jpg" alt="Reclaimed Brick" loading="lazy">
             </div>
         </div>
     </section>
@@ -534,7 +876,7 @@
         <div class="contact-grid">
             <div class="contact-item">
                 <h3>Phone</h3>
-                </p><a href="tel:+12488726241">Joel Henry: (248) 872-6241</a></p>
+                <p><a href="tel:+12488726241">Joel Henry: (248) 872-6241</a></p>
                 <p>Monday – Friday</p>
                 <p>9:00 AM – 4:00 PM</p>
             </div>
@@ -555,5 +897,195 @@
     <footer>
         <p>&copy; 2025 ANTIQUE BRICK. DETROIT RED BRICK DISTRIBUTOR SINCE 1988.</p>
     </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#8249;</button>
+        <img class="lightbox-content" id="lightboxImage" src="" alt="">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">&#8250;</button>
+    </div>
+
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('nav');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+            });
+        });
+
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        const sections = document.querySelectorAll('.section');
+        const navLinksArray = Array.from(navLinks);
+
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinksArray.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const lightboxPrev = document.getElementById('lightboxPrev');
+        const lightboxNext = document.getElementById('lightboxNext');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        let currentImageIndex = 0;
+        const images = Array.from(galleryItems).map(item => ({
+            src: item.dataset.image,
+            alt: item.dataset.alt
+        }));
+
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentImageIndex = index;
+                openLightbox();
+            });
+        });
+
+        function openLightbox() {
+            lightbox.classList.add('active');
+            updateLightboxImage();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightboxImage() {
+            lightboxImage.src = images[currentImageIndex].src;
+            lightboxImage.alt = images[currentImageIndex].alt;
+        }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateLightboxImage();
+        }
+
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateLightboxImage();
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxNext.addEventListener('click', showNextImage);
+        lightboxPrev.addEventListener('click', showPrevImage);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowRight') {
+                    showNextImage();
+                } else if (e.key === 'ArrowLeft') {
+                    showPrevImage();
+                }
+            }
+        });
+
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.src = img.src;
+            });
+        } else {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+            document.body.appendChild(script);
+        }
+    </script>
 </body>
 </html>
